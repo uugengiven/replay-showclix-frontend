@@ -106,7 +106,12 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   popd
 )
 
-
+:: 4. Copy build into main dir, clean up other stuff
+pushd "%DEPLOYMENT_TARGET%"
+rm -force -recurse ./src
+rm -force -recurse ./public
+rm -force -recurse ./node_modules
+cp ./build/* ./
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end

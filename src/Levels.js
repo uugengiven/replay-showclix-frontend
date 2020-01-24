@@ -29,11 +29,11 @@ class Levels extends React.Component
   render() {
     const levels = this.state.price_levels;
     return (
-        <React.Fragment>
-          {levels.map(level => {
-              return <div key={level.level_id} onClick={() => {this.props.onClick(level.level_id)}}>{level.level}</div>
-          })}
-      </React.Fragment>
+      <div className="priceLevels">
+        {levels.map(level => {
+            return <div key={level.level_id} onClick={() => {this.props.onClick(level.level_id)}}>{level.level}</div>
+        })}
+      </div>
     );
   }
 }

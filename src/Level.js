@@ -29,14 +29,25 @@ class Level extends React.Component
     });
   }
 
+  drawTicket(ticket)
+  {
+    return (
+        <div key={ticket.ticket_id} className="row">
+            <div className="status">{ticket.status > 1 ? "✓" : "○"}</div>
+            <div className="name">{ticket.purchase_for || "No Name Given"}</div>
+        </div>
+    );
+  }
+
   render() {
     const tickets = this.state.price_level.tickets;
     return (
         <React.Fragment>
-            <h1 onClick={this.props.onClick}>{this.state.price_level.level} - Total ({tickets.length})</h1>
-            {tickets.map(ticket => {
-                return (<div key={ticket.ticket_id}>{ticket.purchase_for} - {ticket.status > 1 ? "checked in" : "not checked in"}</div>);
-            })}
+            <div className="goBack" onClick={this.props.onClick}>Go Back ↩</div>
+            <h1>{this.state.price_level.level} - Total ({tickets.length})</h1>
+            <div className="names">
+                {tickets.map(this.drawTicket)}
+            </div>
       </React.Fragment>
     );
   }

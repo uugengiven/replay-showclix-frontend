@@ -35,7 +35,7 @@ class Level extends React.Component
         <React.Fragment>
             <h1 onClick={this.props.onClick}>{this.state.price_level.level} - Total ({tickets.length})</h1>
             {tickets.map(ticket => {
-                return <div key={ticket.ticket_id}>{ticket.purchase_for}</div>
+                return (<div key={ticket.ticket_id}>{ticket.purchase_for} - {ticket.status > 1 ? "checked in" : "not checked in"}</div>);
             })}
       </React.Fragment>
     );

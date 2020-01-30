@@ -40,7 +40,21 @@ class Level extends React.Component
   }
 
   render() {
-    const tickets = this.state.price_level.tickets;
+    const tickets = this.state.price_level.tickets.sort((a, b) => {
+      if(a.last_name > b.last_name)
+      {
+        return 1
+      }
+      else if(a.last_name === b.last_name)
+      {
+        return 0
+      }
+      else
+      {
+        return -1
+      }
+    });
+    console.log(tickets);
     return (
         <React.Fragment>
             <div className="goBack" onClick={this.props.onClick}>Go Back ↩</div>

@@ -25,7 +25,11 @@ class Level extends React.Component
       return response.json();
     })
     .then((myJson) => {
+      if(myJson.length>1) {
+        myJson[0].tickets = [...myJson[0].tickets, ...myJson[1].tickets];
+      }
       this.setState({price_level: myJson[0]});
+      //console.log(myJson);
     });
   }
 
@@ -34,6 +38,7 @@ class Level extends React.Component
     return (
         <div key={ticket.ticket_id} className="row">
             <div className="status">{ticket.status > 1 ? "✓" : "○"}</div>
+            <div className="waitlistStatus">{ticket.waitlist_status ? "₩" : ""}</div>
             <div className="name">{ticket.purchase_for || "No Name Given"}</div>
         </div>
     );
@@ -41,17 +46,22 @@ class Level extends React.Component
 
   render() {
     const tickets = this.state.price_level.tickets.sort((a, b) => {
-      if(a.last_name > b.last_name)
-      {
-        return 1
+      if(a.waitlist_status > b.waitlist_status) {
+        return 1;
       }
-      else if(a.last_name === b.last_name)
-      {
-        return 0
+      else if(a.waitlist_status === b.waitlist_status) {
+        if(a.last_name.toUpperCase() > b.last_name.toUpperCase()) {
+          return 1;
+        }
+        else if(a.last_name.toUpperCase() === b.last_name.toUpperCase()) {
+          return 0;
+        }
+        else {
+          return -1;
+        }
       }
-      else
-      {
-        return -1
+      else {
+        return -1;
       }
     });
     console.log(tickets);

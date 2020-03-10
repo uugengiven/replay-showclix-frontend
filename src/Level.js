@@ -15,6 +15,7 @@ class Level extends React.Component
     }
 
     this.getTickets = this.getTickets.bind(this);
+    this.csvexport = this.csvexport.bind(this);
 
     this.getTickets();
   }
@@ -33,8 +34,7 @@ class Level extends React.Component
     });
   }
 
-  drawTicket(ticket)
-  {
+  drawTicket(ticket) {
     return (
         <div key={ticket.ticket_id} className="row">
             <div className="status">{ticket.status > 1 ? "✓" : "○"}</div>
@@ -46,6 +46,14 @@ class Level extends React.Component
 
   csvexport() {
     console.log("Button Click Works");
+
+    const tickets = this.state.price_level.tickets;
+    var outstring = "Name, cancel \n";
+    tickets.forEach(player => {
+      outstring += player.purchase_for + ", " + player.status + "\n";
+    });
+
+    console.log(outstring);
   }
 
   render() {

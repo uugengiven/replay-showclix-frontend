@@ -44,31 +44,27 @@ class Level extends React.Component
     );
   }
 
+  csvexport() {
+    console.log("Button Click Works");
+  }
+
   render() {
     const tickets = this.state.price_level.tickets.sort((a, b) => {
-      if(a.waitlist_status > b.waitlist_status) {
+      if(a.last_name.toUpperCase() > b.last_name.toUpperCase()) {
         return 1;
       }
-      else if(a.waitlist_status === b.waitlist_status) {
-        if(a.last_name.toUpperCase() > b.last_name.toUpperCase()) {
-          return 1;
-        }
-        else if(a.last_name.toUpperCase() === b.last_name.toUpperCase()) {
-          return 0;
-        }
-        else {
-          return -1;
-        }
+      else if(a.last_name.toUpperCase() === b.last_name.toUpperCase()) {
+        return 0;
       }
       else {
         return -1;
       }
     });
-    console.log(tickets);
     return (
         <React.Fragment>
             <div className="goBack" onClick={this.props.onClick}>Go Back ↩</div>
             <h1>{this.state.price_level.level} - Total ({tickets.length})</h1>
+            <button onClick={this.csvexport}>Export as CSV</button>
             <div className="names">
                 {tickets.map(this.drawTicket)}
             </div>

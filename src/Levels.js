@@ -16,9 +16,11 @@ class Levels extends React.Component
     this.getTickets();
   }
 
+
   getTickets() {
     fetch(config.API + '/levels')
     .then((response) => {
+      console.log(response);
       return response.json();
     })
     .then((myJson) => {
